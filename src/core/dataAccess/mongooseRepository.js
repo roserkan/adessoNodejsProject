@@ -5,7 +5,7 @@ class MongooseRepository {
 
     async getAll() {
         try {
-            const result = await this.model.find({});
+            const result = await this.model.find({ isDeleted: false });
             return result;
         } catch (error) {
             return error;
@@ -14,10 +14,11 @@ class MongooseRepository {
 
     async getById(id) {
         try {
-            const result = await this.model.findById(id);
+            // const result = await this.model.findById(id);
+            const result = await this.model.find({ id: id, isDeleted: false });
             return result;
         } catch (error) {
-            return error;
+            return null
         }
     }
 
